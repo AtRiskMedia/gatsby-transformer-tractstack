@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-source-tractstack",
+  "name": "gatsby-transformer-tractstack",
   "version": "0.1.0",
   "description": "Source data from tractstack API",
   "main": "index.js",
@@ -22,6 +22,10 @@
     "eslint": "^8.9.0"
   },
   "dependencies": {
-    "prettier": "^2.5.1"
+    "@0x0006e/babel-preset-react": "^1.0.6",
+    "dompurify": "^2.3.6",
+    "gatsby-plugin-image": "^2.8.0",
+    "prettier": "^2.5.1",
+    "prop-types": "^15.8.1"
   }
 }

@@ -2,10 +2,10 @@
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby TractStack Transformer Plugin`,
-    description: `Generates TractStack data structures`,
-    author: `@atriskmedia`,
-    siteUrl: `https://tractstack.com/`
+    title: "Gatsby TractStack Transformer Plugin",
+    description: "Generates TractStack data structures",
+    author: "@atriskmedia",
+    siteUrl: "https://tractstack.com/"
   }
 };
 //# sourceMappingURL=gatsby-config.js.map

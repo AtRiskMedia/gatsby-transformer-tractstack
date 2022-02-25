@@ -1,3 +1,3 @@
-import {Hello3} from './tractstack';
+import {TractStackRender} from './tractstackRender';
 
-export {Hello3};
+export {TractStackRender};
