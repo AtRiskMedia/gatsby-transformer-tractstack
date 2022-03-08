@@ -1,3 +1,3 @@
-import {TractStackRender} from './tractstackRender';
+import {CookUpTractStack} from './tractstack';
 
-export {TractStackRender};
+export {CookUpTractStack};

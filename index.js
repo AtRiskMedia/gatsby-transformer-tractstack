@@ -3,12 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "TractStackRender", {
+Object.defineProperty(exports, "CookUpTractStack", {
   enumerable: true,
   get: function get() {
-    return _tractstackRender.TractStackRender;
+    return _tractstack.CookUpTractStack;
   }
 });
 
-var _tractstackRender = require("./tractstackRender");
+var _tractstack = require("./tractstack");
 //# sourceMappingURL=index.js.map
