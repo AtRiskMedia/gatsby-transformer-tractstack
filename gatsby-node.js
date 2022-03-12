@@ -8,8 +8,11 @@
 exports.onCreateNode = function (_ref) {
   var node = _ref.node,
       actions = _ref.actions;
-  var createNode = actions.createNode,
-      createNodeField = actions.createNodeField;
-  if (node && node.internal && node.internal.type) console.log("node added: ", node.internal.type);
+  var DrupalNodes = ['file__file', 'node__tractstack', 'node__story_fragment', 'node__pane'];
+
+  if (node.internal.owner === "gatsby-source-drupal" && DrupalNodes.includes(node.internal.type)) {
+    console.log("parent node added: ", node.internal.type);
+    console.log(node); // need to preprocess tractstack nodes from drupal
+  }
 };
 //# sourceMappingURL=gatsby-node.js.map
