@@ -85,4 +85,4 @@ function CookUpTractStack(data) {
   if (!valid) console.log(validate.errors);else console.log("validated json schema");
   return "";
 }
-//# sourceMappingURL=tractstack.js.map
+//# sourceMappingURL=DELETE-tractstack.js.map

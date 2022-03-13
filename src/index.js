@@ -1,3 +1,3 @@
-import {CookUpTractStack} from './tractstack';
+import { renderHtmlToReact } from "./helpers";
 
-export {CookUpTractStack};
+export{ renderHtmlToReact };

@@ -3,12 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-Object.defineProperty(exports, "CookUpTractStack", {
+Object.defineProperty(exports, "renderHtmlToReact", {
   enumerable: true,
   get: function get() {
-    return _tractstack.CookUpTractStack;
+    return _helpers.renderHtmlToReact;
   }
 });
 
-var _tractstack = require("./tractstack");
+var _helpers = require("./helpers");
 //# sourceMappingURL=index.js.map

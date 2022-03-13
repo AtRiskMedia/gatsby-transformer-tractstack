@@ -1,6 +1,23 @@
+//const DomParser = require("dom-parser");
 
+const imageTagExtractor = (html) => {
+  const regExImageTag = /\(\/sites[^)]+\)/gi; // from Drupal
+  const imageTags = content.match(regExImageTag);
+  if (imageTags) {
+      const nodes = getNodes();
+      imageTags.forEach((element) => {
+          const imageTag = element.slice(1, -1);
+          const imageTagCached = imageTags.find(file => (file.internal.type === 'File' && file.internal.description.includes(imageTag)));
+          if (imageTagCached) {
+              console.log(`replace ${imageTag}`);
+              content = content.replace(new RegExp(imageTag, 'g'), imageTagCached.relativePath);
+          }
+      });
+  }
+}
+
+/*
 const tagExtractor = (content) => {
-  const DomParser = require("dom-parser");
   const tagParser = new DomParser();
   // in pre-processing markdown from Drupal
   // parse for non-gatsby image, svg, links and tractstack actions
@@ -24,17 +41,9 @@ const tagExtractor = (content) => {
     imageTagsProcessed: imageTagsProcessed
   };
 }
-
-const processMarkdown = (contentRaw) => {
-  var SimpleMarkdown = require("simple-markdown");
-  var mdParse = SimpleMarkdown.defaultBlockParse;
-  var mdOutput = SimpleMarkdown.defaultOutput;
-  var syntaxTree = mdParse(contentRaw);
-  console.log(JSON.stringify(syntaxTree, null, 4));
-  return mdOutput(syntaxTree);
-}
+*/
 
 module.exports = {
-  tagExtractor,
-  processMarkdown
+//  tagExtractor,
+  imageTagExtractor
 }

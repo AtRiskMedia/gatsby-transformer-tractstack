@@ -1,1 +1,1 @@
-{"version":3,"sources":["src/index.js"],"names":[],"mappings":";;;;;;;;;;;;AAAA","sourcesContent":["import {CookUpTractStack} from './tractstack';\n\nexport {CookUpTractStack};\n"],"file":"index.js"}
+{"version":3,"sources":["src/index.js"],"names":[],"mappings":";;;;;;;;;;;;AAAA","sourcesContent":["import { renderHtmlToReact } from \"./helpers\";\n\nexport{ renderHtmlToReact };\n"],"file":"index.js"}

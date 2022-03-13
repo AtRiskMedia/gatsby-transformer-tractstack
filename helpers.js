@@ -1,65 +1,56 @@
 "use strict";
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+//const DomParser = require("dom-parser");
+var imageTagExtractor = function imageTagExtractor(html) {
+  var regExImageTag = /\(\/sites[^)]+\)/gi; // from Drupal
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+  var imageTags = content.match(regExImageTag);
 
-var tagExtractor = function tagExtractor(content) {
-  var DomParser = require("dom-parser");
+  if (imageTags) {
+    var nodes = getNodes();
+    imageTags.forEach(function (element) {
+      var imageTag = element.slice(1, -1);
+      var imageTagCached = imageTags.find(function (file) {
+        return file.internal.type === 'File' && file.internal.description.includes(imageTag);
+      });
 
-  var tagParser = new DomParser(); // in pre-processing markdown from Drupal
+      if (imageTagCached) {
+        console.log("replace ".concat(imageTag));
+        content = content.replace(new RegExp(imageTag, 'g'), imageTagCached.relativePath);
+      }
+    });
+  }
+};
+/*
+const tagExtractor = (content) => {
+  const tagParser = new DomParser();
+  // in pre-processing markdown from Drupal
   // parse for non-gatsby image, svg, links and tractstack actions
-
-  var imageTagsParsed = tagParser.parseFromString(content);
-  var imageTags = imageTagsParsed.getElementsByTagName("img");
-  var imageTagsProcessed = [];
-  imageTagsProcessed.forEach(function (imageTag) {
-    imageTag.attributes.forEach( /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(imageTagAttrs) {
-        var imageUrl;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (inlineImageAttrs.name === 'src') {
-                  imageUrl = "https://".concat(imageTagAttrs.value);
-                  imageTags.push({
-                    relativePath: imageTagAttrs.value,
-                    remotePath: imageUrl
-                  });
-                }
-
-              case 1:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function (_x) {
-        return _ref.apply(this, arguments);
-      };
-    }());
+  const imageTagsParsed = tagParser.parseFromString(content)
+  const imageTags = imageTagsParsed.getElementsByTagName("img")
+  const imageTagsProcessed = [];
+  imageTagsProcessed.forEach(imageTag => {
+      imageTag.attributes.forEach(async (imageTagAttrs) => {
+      if (inlineImageAttrs.name === 'src') {
+        const imageUrl = `https://${imageTagAttrs.value}`;
+        imageTags.push({
+          relativePath: imageTagAttrs.value,
+          remotePath: imageUrl
+        });
+      }
+    })
   });
+
   return {
     contentProcessed: content,
     imageTagsProcessed: imageTagsProcessed
   };
-};
+}
+*/
 
-var processMarkdown = function processMarkdown(contentRaw) {
-  var SimpleMarkdown = require("simple-markdown");
-
-  var mdParse = SimpleMarkdown.defaultBlockParse;
-  var mdOutput = SimpleMarkdown.defaultOutput;
-  var syntaxTree = mdParse(contentRaw);
-  console.log(JSON.stringify(syntaxTree, null, 4));
-  return mdOutput(syntaxTree);
-};
 
 module.exports = {
-  tagExtractor: tagExtractor,
-  processMarkdown: processMarkdown
+  //  tagExtractor,
+  imageTagExtractor: imageTagExtractor
 };
 //# sourceMappingURL=helpers.js.map
