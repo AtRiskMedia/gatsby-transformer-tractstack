@@ -12,34 +12,56 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var _require = require("./helpers"),
+    tagExtractor = _require.tagExtractor,
+    processMarkdown = _require.processMarkdown;
+
+var DrupalNodes = ['paragraph__markdown', 'paragraph__background', 'paragraph__video', 'paragraph__d3', 'paragraph__h5p'];
+
+var _camelCase = require('lodash/camelCase');
+
 exports.onCreateNode = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref) {
-    var createNodeId, node, actions, createNode, createNodeField, DrupalNodes;
+    var node, createNodeId, createContentDigest, actions, createNode, createNodeField, createParentChildLink, content, paneFragment;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            createNodeId = _ref.createNodeId, node = _ref.node, actions = _ref.actions;
-            createNode = actions.createNode, createNodeField = actions.createNodeField;
-            DrupalNodes = ['paragraph__markdown', 'paragraph__background', 'paragraph__video', 'paragraph__d3', 'paragraph__h5p'];
+            node = _ref.node, createNodeId = _ref.createNodeId, createContentDigest = _ref.createContentDigest, actions = _ref.actions;
 
             if (!(node.internal.owner !== "gatsby-source-drupal" || !DrupalNodes.includes(node.internal.type))) {
-              _context.next = 5;
+              _context.next = 3;
               break;
             }
 
-            return _context.abrupt("return");
+            return _context.abrupt("return", {});
 
-          case 5:
-            console.log("paragraph found: ", node.internal.type);
-            console.log(node);
-            createNodeField({
-              node: node,
-              name: "rendered_component",
-              value: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "test"))
-            }); // need to preprocess tractstack nodes from drupal
+          case 3:
+            createNode = actions.createNode, createNodeField = actions.createNodeField, createParentChildLink = actions.createParentChildLink;
+            content = node.field_markdown_body; // todo:
+            // preprocess raw markdown and inject tractstack goodies
+            //
 
-          case 8:
+            paneFragment = {
+              id: createNodeId("".concat(node.id, "Unprocessed")),
+              parent: node.id,
+              children: [],
+              internal: {
+                type: _camelCase("".concat(node.internal.type)),
+                mediaType: "text/markdown",
+                content: content
+              }
+            };
+            paneFragment.rawMarkdownBody = content;
+            paneFragment.internal.contentDigest = createContentDigest(paneFragment);
+            createNode(paneFragment);
+            createParentChildLink({
+              parent: node,
+              child: paneFragment
+            });
+            return _context.abrupt("return", paneFragment);
+
+          case 11:
           case "end":
             return _context.stop();
         }

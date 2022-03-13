@@ -4,13 +4,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-// in pre-processing markdown from Drupal
-// parse for non-gatsby image, svg, links and tractstack actions
-var DomParser = require("dom-parser");
-
-var tagParser = new DomParser();
-
 var tagExtractor = function tagExtractor(content) {
+  var DomParser = require("dom-parser");
+
+  var tagParser = new DomParser(); // in pre-processing markdown from Drupal
+  // parse for non-gatsby image, svg, links and tractstack actions
+
   var imageTagsParsed = tagParser.parseFromString(content);
   var imageTags = imageTagsParsed.getElementsByTagName("img");
   var imageTagsProcessed = [];
@@ -49,7 +48,18 @@ var tagExtractor = function tagExtractor(content) {
   };
 };
 
-module.exports = {
-  tagExtractor: tagExtractor
+var processMarkdown = function processMarkdown(contentRaw) {
+  var SimpleMarkdown = require("simple-markdown");
+
+  var mdParse = SimpleMarkdown.defaultBlockParse;
+  var mdOutput = SimpleMarkdown.defaultOutput;
+  var syntaxTree = mdParse(contentRaw);
+  console.log(JSON.stringify(syntaxTree, null, 4));
+  return mdOutput(syntaxTree);
 };
-//# sourceMappingURL=extract-tags.js.map
+
+module.exports = {
+  tagExtractor: tagExtractor,
+  processMarkdown: processMarkdown
+};
+//# sourceMappingURL=helpers.js.map
