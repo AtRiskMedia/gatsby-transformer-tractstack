@@ -67,14 +67,14 @@ exports.onCreateNode = function (_ref) {
   markdownNode.frontmatter = {
     title: node.field_alt_description
   };
-  console.log(node, markdownNode);
   markdownNode.rawMarkdownBody = content;
   markdownNode.internal.contentDigest = createContentDigest(markdownNode);
   createNode(markdownNode);
   createParentChildLink({
     parent: node,
     child: markdownNode
-  });
+  }); //console.log(node, markdownNode);
+
   /*
   createNodeField({
     markdownNode, name: "images",
