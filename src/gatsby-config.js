@@ -5,6 +5,6 @@ module.exports = {
     title: `Gatsby TractStack Transformer Plugin`,
     description: `Generates TractStack data structures`,
     author: `@atriskmedia`,
-    siteUrl: `https://tractstack.com/`
-  }
+    siteUrl: `https://tractstack.com/`,
+  },
 };

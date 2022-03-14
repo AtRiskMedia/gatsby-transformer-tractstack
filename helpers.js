@@ -11,12 +11,12 @@ var imageTagExtractor = function imageTagExtractor(html) {
     imageTags.forEach(function (element) {
       var imageTag = element.slice(1, -1);
       var imageTagCached = imageTags.find(function (file) {
-        return file.internal.type === 'File' && file.internal.description.includes(imageTag);
+        return file.internal.type === "File" && file.internal.description.includes(imageTag);
       });
 
       if (imageTagCached) {
         console.log("replace ".concat(imageTag));
-        content = content.replace(new RegExp(imageTag, 'g'), imageTagCached.relativePath);
+        content = content.replace(new RegExp(imageTag, "g"), imageTagCached.relativePath);
       }
     });
   }
