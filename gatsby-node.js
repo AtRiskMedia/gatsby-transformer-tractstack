@@ -8,13 +8,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var DrupalNodes = ["paragraph__markdown", "paragraph__background", "paragraph__video", "paragraph__d3", "paragraph__h5p"];
+var DrupalNodes = ["paragraph__markdown", "paragraph__image", "paragraph__svg", "paragraph__video", "paragraph__d3", "paragraph__h5p"];
 
 exports.onCreateNode = function (_ref) {
   var node = _ref.node,
       createNodeId = _ref.createNodeId,
       createContentDigest = _ref.createContentDigest,
-      getNode = _ref.getNode,
       actions = _ref.actions;
 
   if (node.internal.owner !== "gatsby-source-drupal" || !DrupalNodes.includes(node.internal.type)) {
@@ -24,38 +23,33 @@ exports.onCreateNode = function (_ref) {
   var createNode = actions.createNode,
       createNodeField = actions.createNodeField,
       createParentChildLink = actions.createParentChildLink;
-  /*
-  var images = node?.relationships?.field_image___NODE;
-  var markdownPreProcess = node?.field_markdown_body;
-   for (const [i, id] of Object.entries(images)) {
-    var imageNode = getNode(id);
-    markdownPreProcess = MarkdownInjectImagePlaceholder(
-      markdownPreProcess,
-      id,
-      imageNode.filename
-    );
-  }
-  */
 
-  var markdownNode = {
-    id: createNodeId("".concat(node.id, " MarkdownRemark")),
-    parent: node.id,
-    children: [],
-    internal: {
-      type: "PaneFragment",
-      mediaType: "text/markdown",
-      content: node === null || node === void 0 ? void 0 : node.field_markdown_body
-    }
-  };
-  markdownNode.frontmatter = {
-    title: node.field_alt_description
-  };
-  markdownNode.internal.contentDigest = createContentDigest(markdownNode);
-  createNode(markdownNode);
-  createParentChildLink({
-    parent: node,
-    child: markdownNode
-  });
-  return markdownNode;
+  switch (node.internal.type) {
+    case "paragraph__markdown":
+      var markdownNode = {
+        id: createNodeId("".concat(node.id, " MarkdownRemark")),
+        parent: node.id,
+        children: [],
+        internal: {
+          type: "PaneFragment",
+          mediaType: "text/markdown",
+          content: node === null || node === void 0 ? void 0 : node.field_markdown_body
+        }
+      };
+      markdownNode.frontmatter = {
+        title: node.field_alt_description
+      };
+      markdownNode.internal.contentDigest = createContentDigest(markdownNode);
+      createNode(markdownNode);
+      createParentChildLink({
+        parent: node,
+        child: markdownNode
+      });
+      return markdownNode;
+
+    case "paragraph__image":
+      //
+      break;
+  }
 };
 //# sourceMappingURL=gatsby-node.js.map
