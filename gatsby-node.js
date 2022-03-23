@@ -8,11 +8,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var DrupalNodes = ["paragraph__markdown" //"paragraph__background_image", // does not need any preprocessing
+var DrupalNodes = ["paragraph__markdown" // none require any further preprocessing
+//"paragraph__background_image",
 //"paragraph__svg",
 //"paragraph__video",
 //"paragraph__d3",
-//"paragraph__h5p",
+//"paragraph__h5p", ** maybe h5p will
 ];
 
 exports.onCreateNode = function (_ref) {
@@ -51,21 +52,6 @@ exports.onCreateNode = function (_ref) {
         child: markdownNode
       });
       return markdownNode;
-
-    /*
-    case "paragraph__svg":
-      //
-      break;
-     case "paragraph__video":
-      //
-      break;
-     case "paragraph__d3":
-      //
-      break;
-     case "paragraph__h5p":
-      //
-      break;
-    */
   }
 };
 //# sourceMappingURL=gatsby-node.js.map

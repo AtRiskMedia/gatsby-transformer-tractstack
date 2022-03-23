@@ -2,11 +2,12 @@ import * as React from "react";
 
 const DrupalNodes = [
   "paragraph__markdown",
-  //"paragraph__background_image", // does not need any preprocessing
+  // none require any further preprocessing
+  //"paragraph__background_image",
   //"paragraph__svg",
   //"paragraph__video",
   //"paragraph__d3",
-  //"paragraph__h5p",
+  //"paragraph__h5p", ** maybe h5p will
 ];
 
 exports.onCreateNode = ({
@@ -42,22 +43,5 @@ exports.onCreateNode = ({
       createNode(markdownNode);
       createParentChildLink({ parent: node, child: markdownNode });
       return markdownNode;
-    /*
-    case "paragraph__svg":
-      //
-      break;
-
-    case "paragraph__video":
-      //
-      break;
-
-    case "paragraph__d3":
-      //
-      break;
-
-    case "paragraph__h5p":
-      //
-      break;
-    */
   }
 };
