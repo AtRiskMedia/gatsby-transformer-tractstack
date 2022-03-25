@@ -18,12 +18,12 @@
   "license": "LGPL",
   "devDependencies": {
     "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.5",
-    "eslint": "^8.10.0"
+    "@babel/core": "^7.17.8",
+    "eslint": "^8.11.0"
   },
   "dependencies": {
     "@0x0006e/babel-preset-react": "^1.0.6",
-    "prettier": "^2.5.1",
+    "prettier": "^2.6.0",
     "react": "^17.0.2"
   }
 }
