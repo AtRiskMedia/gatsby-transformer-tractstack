@@ -1,14 +1,6 @@
 import * as React from "react";
 
-const DrupalNodes = [
-  "paragraph__markdown",
-  // none require any further preprocessing
-  //"paragraph__background_image",
-  //"paragraph__svg",
-  //"paragraph__video",
-  //"paragraph__d3",
-  //"paragraph__h5p", ** maybe h5p will
-];
+const DrupalNodes = ["paragraph__markdown"];
 
 exports.onCreateNode = ({
   node,
@@ -26,6 +18,7 @@ exports.onCreateNode = ({
 
   switch (node.internal.type) {
     case "paragraph__markdown":
+      // generate MarkdownRemark and PaneFragment
       const markdownNode = {
         id: createNodeId(`${node.id} MarkdownRemark`),
         parent: node.id,
