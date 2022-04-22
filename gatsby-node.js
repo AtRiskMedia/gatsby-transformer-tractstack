@@ -29,7 +29,7 @@ exports.onCreateNode = function (_ref) {
       // generate MarkdownRemark and PaneFragment
       var markdownNode = {
         id: createNodeId("".concat(node.id, " MarkdownRemark")),
-        parent: node.id,
+        parent: node === null || node === void 0 ? void 0 : node.id,
         children: [],
         internal: {
           type: "PaneFragment",
@@ -38,7 +38,8 @@ exports.onCreateNode = function (_ref) {
         }
       };
       markdownNode.frontmatter = {
-        title: node.field_alt_description
+        title: node === null || node === void 0 ? void 0 : node.field_alt_description,
+        id: node === null || node === void 0 ? void 0 : node.id
       };
       markdownNode.internal.contentDigest = createContentDigest(markdownNode);
       createNode(markdownNode);

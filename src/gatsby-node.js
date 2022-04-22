@@ -21,7 +21,7 @@ exports.onCreateNode = ({
       // generate MarkdownRemark and PaneFragment
       const markdownNode = {
         id: createNodeId(`${node.id} MarkdownRemark`),
-        parent: node.id,
+        parent: node?.id,
         children: [],
         internal: {
           type: `PaneFragment`,
@@ -30,7 +30,8 @@ exports.onCreateNode = ({
         },
       };
       markdownNode.frontmatter = {
-        title: node.field_alt_description,
+        title: node?.field_alt_description,
+        id: node?.id,
       };
       markdownNode.internal.contentDigest = createContentDigest(markdownNode);
       createNode(markdownNode);
