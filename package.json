@@ -17,13 +17,13 @@
   "author": "Adon Irani <a@atriskmedia.com>",
   "license": "LGPL",
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.8",
-    "eslint": "^8.11.0"
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.10",
+    "eslint": "^8.14.0"
   },
   "dependencies": {
     "@0x0006e/babel-preset-react": "^1.0.6",
-    "prettier": "^2.6.0",
+    "prettier": "^2.6.2",
     "react": "^17.0.2"
   }
 }
