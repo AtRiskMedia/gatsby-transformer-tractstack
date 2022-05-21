@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const DrupalNodes = ["paragraph__markdown"];
+const DrupalMarkdownNodes = ["paragraph__markdown", "paragraph__modal"];
 
 exports.onCreateNode = ({
   node,
@@ -10,13 +10,14 @@ exports.onCreateNode = ({
 }) => {
   if (
     node.internal.owner !== "gatsby-source-drupal" ||
-    !DrupalNodes.includes(node.internal.type)
+    !DrupalMarkdownNodes.includes(node.internal.type)
   ) {
     return {};
   }
   const { createNode, createNodeField, createParentChildLink } = actions;
 
   switch (node.internal.type) {
+    case "paragraph__modal":
     case "paragraph__markdown":
       // generate MarkdownRemark and PaneFragment
       const markdownNode = {

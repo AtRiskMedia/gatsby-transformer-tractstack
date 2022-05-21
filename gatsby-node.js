@@ -8,7 +8,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var DrupalNodes = ["paragraph__markdown"];
+var DrupalMarkdownNodes = ["paragraph__markdown", "paragraph__modal"];
 
 exports.onCreateNode = function (_ref) {
   var node = _ref.node,
@@ -16,7 +16,7 @@ exports.onCreateNode = function (_ref) {
       createContentDigest = _ref.createContentDigest,
       actions = _ref.actions;
 
-  if (node.internal.owner !== "gatsby-source-drupal" || !DrupalNodes.includes(node.internal.type)) {
+  if (node.internal.owner !== "gatsby-source-drupal" || !DrupalMarkdownNodes.includes(node.internal.type)) {
     return {};
   }
 
@@ -25,6 +25,7 @@ exports.onCreateNode = function (_ref) {
       createParentChildLink = actions.createParentChildLink;
 
   switch (node.internal.type) {
+    case "paragraph__modal":
     case "paragraph__markdown":
       // generate MarkdownRemark and PaneFragment
       var markdownNode = {
