@@ -1,1 +1,1 @@
-# gatsby-source-tractstack
+# gatsby-transformer-tractstack
