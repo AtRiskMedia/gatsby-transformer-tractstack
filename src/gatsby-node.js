@@ -2,6 +2,12 @@ import * as React from "react";
 
 const DrupalMarkdownNodes = ["paragraph__markdown", "paragraph__modal"];
 
+//exports.createSchemaCustomization = ({ actions }) => {
+//const { createTypes } = actions;
+
+//createTypes(``);
+//};
+
 exports.onCreateNode = ({
   node,
   createNodeId,
