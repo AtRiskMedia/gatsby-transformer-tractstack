@@ -1,11 +1,31 @@
 import * as React from "react";
 
-const DrupalMarkdownNodes = ["paragraph__markdown", "paragraph__modal"];
+const DrupalMarkdownNodes = ["paragraph__markdown"];
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+
+type node__menu implements Node {
+  field_image_logo: node__menuField_image_logo
+}
+
+type node__menuRelationships {
+  field_image_logo: file__file @link(by: "id", from: "field_image_logo___NODE")
+}
+
+type node__menuField_image_logo {
+  display: Boolean
+  description: String
+  drupal_internal__target_id: Int
+}
+
+`;
+  createTypes(typeDefs);
+};
 
 //exports.createSchemaCustomization = ({ actions }) => {
-//const { createTypes } = actions;
-
-//createTypes(``);
+//  actions.printTypeDefinitions({ path: "./typeDefs.txt" });
 //};
 
 exports.onCreateNode = ({
@@ -21,9 +41,7 @@ exports.onCreateNode = ({
     return {};
   }
   const { createNode, createNodeField, createParentChildLink } = actions;
-
   switch (node.internal.type) {
-    case "paragraph__modal":
     case "paragraph__markdown":
       // generate MarkdownRemark and PaneFragment
       const markdownNode = {
