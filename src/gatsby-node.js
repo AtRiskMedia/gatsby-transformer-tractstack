@@ -24,10 +24,6 @@ type node__menuField_image_logo {
   createTypes(typeDefs);
 };
 
-//exports.createSchemaCustomization = ({ actions }) => {
-//  actions.printTypeDefinitions({ path: "./typeDefs.txt" });
-//};
-
 exports.onCreateNode = ({
   node,
   createNodeId,
