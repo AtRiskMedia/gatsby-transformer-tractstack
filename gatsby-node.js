@@ -15,10 +15,7 @@ exports.createSchemaCustomization = function (_ref) {
   var createTypes = actions.createTypes;
   var typeDefs = "\n\ntype node__menu implements Node {\n  field_image_logo: node__menuField_image_logo\n}\n\ntype node__menuRelationships {\n  field_image_logo: file__file @link(by: \"id\", from: \"field_image_logo___NODE\")\n}\n\ntype node__menuField_image_logo {\n  display: Boolean\n  description: String\n  drupal_internal__target_id: Int\n}\n\n";
   createTypes(typeDefs);
-}; //exports.createSchemaCustomization = ({ actions }) => {
-//  actions.printTypeDefinitions({ path: "./typeDefs.txt" });
-//};
-
+};
 
 exports.onCreateNode = function (_ref2) {
   var node = _ref2.node,
