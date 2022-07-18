@@ -4,10 +4,8 @@ const DrupalMarkdownNodes = ["paragraph__markdown"];
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
-  const typeDefs = `
 
-
-/*
+  /*
 schema to preset...
 
     nodeStoryFragment(id: { eq: $id }) {
@@ -184,9 +182,7 @@ schema to preset...
   }
 */
 
-
-
-
+  const typeDefs = `
 type node__menu implements Node {
   field_image_logo: node__menuField_image_logo
 }
