@@ -21,9 +21,6 @@ exports.createSchemaCustomization = function (_ref) {
         field_menu {
           field_options
           field_theme
-          field_pixel_height_mobile
-          field_pixel_height_tablet
-          field_pixel_height_desktop
           relationships {
             field_svg_logo {
               localFile {
