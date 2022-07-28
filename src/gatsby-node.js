@@ -292,11 +292,12 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(typeDefs);
 };
 
+/*
 exports.createResolvers = ({ createResolvers }) => {
   const resolvers = {
     PaneFragment: {
       childMarkdownRemark: {
-        type: ["MarkdownRemark"],
+        type: ["PaneFragment"],
         resolve: async (source, args, context, info) => {
           const { entries } = await context.nodeModel.findAll({
             query: {
@@ -304,7 +305,7 @@ exports.createResolvers = ({ createResolvers }) => {
                 htmlAst: { eq: true },
               },
             },
-            type: "MarkdownRemark",
+            type: "PaneFragment",
           });
           return entries;
         },
@@ -313,3 +314,4 @@ exports.createResolvers = ({ createResolvers }) => {
   };
   createResolvers(resolvers);
 };
+*/
